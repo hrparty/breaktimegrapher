@@ -1,6 +1,7 @@
 # Breaktimegrapher
 
-My friend Ragnar Freyr wanted to write down the number of pomodoros he did per day, which he tracked with the Breaktime app.
+My friend [Ragnar Freyr](http://ragnarfreyr.com/about/) wanted to write down the number of pomodoros
+he did per day, which he tracked with the [Breaktime app](http://breaktimeapp.com/).
 
 So I helped him out by creating a ruby script that graphs out the number of pomodoros in a simple text file, formatted like this:
 

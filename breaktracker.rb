@@ -1,8 +1,6 @@
 require 'date'
 
 @filename = "breakgraph.txt"
-# regex that matches the line format
-lineregex = /(\d\d\.\d\d\.\d{4}): x+/
 
 def write_new_line
   puts "Today has not been added before, drawing new bar"
@@ -17,12 +15,20 @@ def append_to_last_line
   File.write(f = @filename, File.read(f).gsub(/#{todays_line}/, Date.today.strftime("%d.%m.%Y: xx")))
 end
 
-if File.exist? @filename and !File.zero? @filename
+def parse_file
+  # regex that matches the line format
+  lineregex = /(\d\d\.\d\d\.\d{4}): x+/
+
   # get the last line in the file
   lastline = IO.readlines(@filename)[-1]
 
   # apply the line regex to it
   regexmatch = lineregex.match lastline
+
+  unless regexmatch
+    puts "Cannot parse last line of file, assuming corrupt format or file, bailing out."
+    return
+  end
 
   # capture the date using a regex, see docs here:
   # http://ruby-doc.org//core-2.2.0/Regexp.html#class-Regexp-label-Capturing
@@ -36,7 +42,15 @@ if File.exist? @filename and !File.zero? @filename
     # No entry for today, create a new line
     write_new_line
   end
-else
-  puts "File does not exist, I will create it"
-  write_new_line
 end
+
+def breakgrapher
+  if File.exist? @filename and not File.zero? @filename
+    parse_file
+  else
+    puts "File is empty or does not exist, I will create it"
+    write_new_line
+  end
+end
+
+breakgrapher

@@ -15,3 +15,11 @@ etc.
 
 Created this script in ruby and then called it from an applescript, because the Breaktime app enables applescripts to be run,
 but I didn't want to learn applescript at that time. Chose ruby because it is installed by default on macs.
+
+## How to run from applescript
+
+This can be run via applescript using this code:
+
+```
+do shell script "cd '(path to your folder)' && ruby breaktracker.rb"
+```
